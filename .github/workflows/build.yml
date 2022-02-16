@@ -23,7 +23,12 @@ jobs:
         run: cmake --build .
 
       - name: Install
-        run: cmake --build . --target install
+        run: |
+              if [ "$RUNNER_OS" == "Windows" ]; then
+                cmake --build . --target install
+              else
+                sudo cmake --build . --target install
+        shell: bash
 
       - name: Test
         run: ctest --output-on-failure
