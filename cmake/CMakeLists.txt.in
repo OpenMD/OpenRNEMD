@@ -7,7 +7,7 @@ include(ExternalProject)
 
 ExternalProject_Add(${EXTERN_ARGS_PROJECT}-download
                     GIT_REPOSITORY    ${EXTERN_ARGS_REPOSITORY}
-                    GIT_TAG           master
+                    GIT_TAG           main
                     SOURCE_DIR        "${EXTERN_ARGS_PROJECT}-src"
                     BINARY_DIR        "${EXTERN_ARGS_PROJECT}-build"
                     CONFIGURE_COMMAND ""
