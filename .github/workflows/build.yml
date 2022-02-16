@@ -28,6 +28,7 @@ jobs:
                 cmake --build . --target install
               else
                 sudo cmake --build . --target install
+              fi
         shell: bash
 
       - name: Test
