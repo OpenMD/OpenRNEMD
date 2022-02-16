@@ -1,0 +1,29 @@
+name: build
+
+on: [push]
+
+env:
+  BUILD_TYPE: Release
+
+jobs:
+  builds:
+    runs-on: ${{ matrix.os }}
+    if: "!contains(github.event.head_commit.message, '[skip ci]') && !contains(github.event.head_commit.message, '[ci skip]')"
+    strategy:
+      matrix:
+        os: [macos-latest, ubuntu-20.04, windows-latest]
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Configure
+        run: cmake $GITHUB_WORKSPACE -DCMAKE_BUILD_TYPE=$BUILD_TYPE -Drnemd_build_all=ON
+
+      - name: Build
+        run: cmake --build .
+
+      - name: Install
+        run: cmake --build . --target install
+
+      - name: Test
+        run: ctest --output-on-failure
